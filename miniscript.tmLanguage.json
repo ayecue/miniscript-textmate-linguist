@@ -1,0 +1,219 @@
+{
+  "version": "1.0.0",
+  "name": "MiniScript",
+  "scopeName": "source.ms",
+  "patterns": [
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#numeric"
+    },
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#constant"
+    },
+    {
+      "include": "#keyword"
+    },
+    {
+      "include": "#function"
+    },
+    {
+      "include": "#type"
+    },
+    {
+      "include": "#general-functions"
+    },
+    {
+      "include": "#type-methods"
+    },
+    {
+      "patterns": [
+        {
+          "include": "#variables"
+        },
+        {
+          "include": "#identifier"
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "function": {
+      "begin": "(?<=function\\()",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "#string"
+        },
+        {
+          "match": "([^=\\),]+)(=[^\\),\"]+)?",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+                  "name": "variable.parameter.miniscript"
+                }
+              ]
+            },
+            "2": {
+              "patterns": [
+                {
+                  "include": "#string"
+                },
+                {
+                  "include": "#numeric"
+                },
+                {
+                  "include": "#constant"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "support.variable.miniscript",
+          "match": "\\b(params|locals|globals|outer)\\b"
+        },
+        {
+          "name": "variable.language.self.miniscript",
+          "match": "\\b(self)\\b"
+        },
+        {
+          "name": "variable.language.super.miniscript",
+          "match": "\\b(super)\\b"
+        }
+      ]
+    },
+    "identifier": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute.miniscript",
+          "match": "(?<=[^.]\\.)\\b([a-zA-Z_][\\w]*)"
+        },
+        {
+          "name": "constant.other.miniscript",
+          "match": "\\b([A-Z_]+)\\b"
+        },
+        {
+          "name": "entity.name.type.miniscript",
+          "match": "\\b([A-Z][\\w]*)\\b"
+        },
+        {
+          "name": "variable.other.miniscript",
+          "match": "\\b([a-z_][\\w]*)\\b"
+        }
+      ]
+    },
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line",
+          "begin": "//(?!(include|import))",
+          "end": "\\n"
+        }
+      ]
+    },
+    "numeric": {
+      "patterns": [
+        {
+          "name": "constant.numeric",
+          "match": "(?<![\\w\\d.])\\d+(\\.\\d+)?([eE]-?\\d*)?"
+        }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.double.miniscript",
+      "begin": "\"",
+      "end": "\""
+    },
+    "keyword": {
+      "patterns": [
+        {
+          "name": "keyword.control.block.miniscript",
+          "match": "\\b(if|then|end|else|function|in|while|for|from)\\b"
+        },
+        {
+          "name": "keyword.control.statement.miniscript",
+          "match": "\\b(return|continue|break)\\b"
+        },
+        {
+          "name": "keyword.control.logical.miniscript",
+          "match": "\\b(and|or|isa)\\b"
+        },
+        {
+          "name": "keyword.control.unary.miniscript",
+          "match": "\\b(not|new)\\b"
+        },
+        {
+          "name": "keyword.control.notused.miniscript",
+          "match": "\\b(repeat)\\b"
+        },
+        {
+          "name": "keyword.control.greybel.miniscript",
+          "match": "#(include|import|envar|inject)\\b"
+        },
+        {
+          "name": "keyword.control.greybel.miniscript",
+          "match": "//(include|import)\\b"
+        },
+        {
+          "name": "keyword.control.greybel.miniscript",
+          "match": "\\b(debugger)\\b"
+        },
+        {
+          "name": "keyword.operator.binary.miniscript",
+          "match": "([\\^|\\&]|<<|>>>?)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.miniscript",
+          "match": "([+\\-*\\/%])"
+        },
+        {
+          "name": "keyword.operator.comparison.miniscript",
+          "match": "([<>=!]=|[<>])"
+        },
+        {
+          "name": "keyword.operator.assignment.miniscript",
+          "match": "([+\\-*\\/%]=)"
+        }
+      ]
+    },
+    "constant": {
+      "name": "constant.language.miniscript",
+      "match": "\\b(true|false|null)\\b"
+    },
+    "type": {
+      "name": "support.class.miniscript",
+      "match": "\\b(list|map|number|string|funcRef)\\b"
+    },
+    "general-functions": {
+      "name": "support.function.miniscript",
+      "match": "\\b(abs|acos|asin|atan|bitAnd|bitOr|bitXor|ceil|char|code|cos|floor|funcRef|hasIndex|hash|indexOf|indexes|insert|join|len|list|log|lower|map|number|pi|pop|print|pull|push|range|refEquals|remove|replace|rnd|round|shuffle|sign|sin|slice|sort|split|sqrt|stackTrace|str|string|sum|tan|time|upper|val|values|version|wait|yield')\\b"
+    },
+    "type-methods": {
+      "patterns": [
+        {
+          "name": "support.function.miniscript",
+          "match": "\\.(remove|push|pop|pull|shuffle|sum|hasIndex|indexOf|sort|join|indexes|len|values)\\b"
+        },
+        {
+          "name": "support.function.miniscript",
+          "match": "\\.(remove|push|pop|pull|shuffle|sum|sum|hasIndex|indexOf|indexes|len|values)\\b"
+        },
+        {
+          "name": "support.function.miniscript",
+          "match": "\\.(remove|hasIndex|indexOf|split|replace|trim|indexes|code|len|lower|upper|val|values)\\b"
+        }
+      ]
+    }
+  }
+}
