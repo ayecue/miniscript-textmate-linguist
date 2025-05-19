@@ -276,7 +276,7 @@
             <key>name</key>
             <string>keyword.operator.assignment.miniscript</string>
             <key>match</key>
-            <string>([+\-*\/%]=)</string>
+            <string>([+\-*\/%]?=)</string>
           </dict>
         </array>
       </dict>

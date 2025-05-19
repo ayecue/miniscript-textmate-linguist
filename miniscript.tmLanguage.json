@@ -183,7 +183,7 @@
         },
         {
           "name": "keyword.operator.assignment.miniscript",
-          "match": "([+\\-*\\/%]=)"
+          "match": "([+\\-*\\/%]?=)"
         }
       ]
     },

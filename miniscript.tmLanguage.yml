@@ -87,7 +87,7 @@ repository:
                   - name: keyword.operator.comparison.miniscript
                     match: ([<>=!]=|[<>])
                   - name: keyword.operator.assignment.miniscript
-                    match: ([+\-*\/%]=)
+                    match: ([+\-*\/%]?=)
       constant:
             name: constant.language.miniscript
             match: \b(true|false|null)\b
